@@ -1,0 +1,28 @@
+호스트1
+15.164.84.22
+10.0.0.150
+호스트2
+15.164.84.41
+10.0.0.205
+호스트3
+15.165.102.155
+10.0.0.175
+호스트4
+15.165.125.231
+10.0.0.22
+호스트5
+15.165.136.43
+10.0.0.196
+
+adduser --uid 3800
+passwd training
+
+groupadd skcc
+
+
+usermod -a -G skcc training
+
+chmod +w /etc/sudoers
+
+vi /etc/sudoers
+
