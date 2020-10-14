@@ -14,7 +14,7 @@
 15.165.136.43
 10.0.0.196
 
-adduser --uid 3800
+adduser training --uid 3800
 passwd training
 
 groupadd skcc
@@ -26,3 +26,4 @@ chmod +w /etc/sudoers
 
 vi /etc/sudoers
 
+https://docs.cloudera.com/documentation/enterprise/5-15-x/topics/install_cm_mariadb.html#install_cm_mariadb
