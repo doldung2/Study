@@ -24,6 +24,10 @@ usermod -a -G skcc training
 
 chmod +w /etc/sudoers
 
-vi /etc/sudoers
+sudo vi /etc/sudoers
 
 https://docs.cloudera.com/documentation/enterprise/5-15-x/topics/install_cm_mariadb.html#install_cm_mariadb
+
+SHOW VARIABLES WHERE Variable_name = 'hostname';
+
+https://docs.cloudera.com/documentation/enterprise/5-15-x/topics/configure_cm_repo.html#cm_repo
