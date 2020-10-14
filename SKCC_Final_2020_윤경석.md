@@ -31,3 +31,6 @@ https://docs.cloudera.com/documentation/enterprise/5-15-x/topics/install_cm_mari
 SHOW VARIABLES WHERE Variable_name = 'hostname';
 
 https://docs.cloudera.com/documentation/enterprise/5-15-x/topics/configure_cm_repo.html#cm_repo
+
+
+https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.2/
