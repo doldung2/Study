@@ -15,6 +15,6 @@ sudo groupadd skcc
 ```
 4. Give training sudo capabilities
 ```linux
-sudo user -aG skcc training
+sudo usermod -aG skcc training
 sudo chmod +w /etc/sudoers
 ```
