@@ -18,3 +18,19 @@ sudo groupadd skcc
 sudo usermod -aG skcc training
 sudo chmod +w /etc/sudoers
 ```
+
+#### List the your instances by IP address and DNS name (don't user /etc/hosts for this)
+```linux
+getent hosts
+```
+
+#### List the Linux release you are using
+```linux
+cat /etc/*release*
+```
+
+#### List the file system capacity for the first node (master node)
+```linux
+df -h
+fdisk -l
+```
