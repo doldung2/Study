@@ -5,3 +5,7 @@
 ```linux
 adduser training --uid 3800
 ```
+2. Set the password for user "training" to "training"
+```linux
+passwd training
+```
