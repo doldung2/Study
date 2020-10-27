@@ -32,5 +32,42 @@ cat /etc/*release*
 #### List the file system capacity for the first node (master node)
 ```linux
 df -h
-fdisk -l
 ```
+
+#### List the command and output for yum repolist enabled
+```linux
+yum repolist enabled
+```
+
+#### List the /etc/passwd entries for training(only in master namenode)
+```linux
+cat /etc/passwd | grep training
+```
+
+#### List the /etc/group entries for skcc(only in master namenode)
+```linux
+cat /etc/group | grep skcc
+```
+
+### Instsall a MySQL server
+
+#### User MariaDB as the database for all the services. You may choose your own username and passwords but make a record of it so that we may access them.
+
+#### List the following in your GitHub
+#### 1. A command and output that shows the hostname of your database server
+```linux
+show VARIABLES where Variable_name = 'hostname';
+```
+
+#### 2. A command and output that reports the database server version
+```linux
+status
+```
+
+#### 3. A command and output that lists all the databases in the server
+```linux
+SHOW DATABASES;
+```
+
+#### Install Cloudera Manager
+
