@@ -256,4 +256,18 @@ yum install -y cloudera-manager-daemons cloudera-manager-server
 sudo /usr/share/cmf/schema/scm_prepare_database.sh mysql scm scm training
 sudo systemctl start cloudera-scm-server
 ```
+##### 2.12 Install SSH & config sshd_config
+```linux
+yum -y install openssh-server openssh-clients openssh-askpass
+
+# SSH를 사용하여 EC2 인스턴스에 로그인할 때 키 페어 대신에 암호 로그인을 활성화하여 패스워드 인증 허용
+
+sudo vi /etc/ssh/sshd_config
+# PasswordAuthentication -> yes 로 변경 후 저장
+
+# sshd 재시작 및 상태확인
+sudo systemctl restart sshd.service
+sudo systemctl status sshd.service [not found 인 경우도 있음]
+```
+
 
