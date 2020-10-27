@@ -189,5 +189,46 @@ installation should now be secure.
 Thanks for using MariaDB!
 ```
 
+##### 2.7 Installing the MySQL JDBC Driver for MariaDB
+```linux
+wget --no-check-certificate https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz
+
+tar zxvf mysql-connector-java-5.1.46.tar.gz
+
+sudo mkdir -p /usr/share/java/
+cd mysql-connector-java-5.1.46
+sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
+```
+
+##### 2.8 Creating Databases for Cloudera Software
+##### 2.8.1 Login as root
+```linux
+mysql -u root -p
+```
+```sql
+CREATE DATABASE scm DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE amon DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE rman DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE hue DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE metastore DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE sentry DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE nav DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE navms DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+CREATE DATABASE oozie DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+
+
+GRANT ALL ON scm.* TO 'scm'@'%' IDENTIFIED BY 'scm';
+GRANT ALL ON amon.* TO 'amon'@'%' IDENTIFIED BY 'amon';
+GRANT ALL ON rman.* TO 'rman'@'%' IDENTIFIED BY 'rman';
+GRANT ALL ON hue.* TO 'hue'@'%' IDENTIFIED BY 'hue';
+GRANT ALL ON metastore.* TO 'hive'@'%' IDENTIFIED BY 'hive';
+GRANT ALL ON sentry.* TO 'sentry'@'%' IDENTIFIED BY 'sentry';
+GRANT ALL ON nav.* TO 'nav'@'%' IDENTIFIED BY 'nav';
+GRANT ALL ON navms.* TO 'navms'@'%' IDENTIFIED BY 'navms';
+GRANT ALL ON oozie.* TO 'oozie'@'%' IDENTIFIED BY 'oozie';
+```
+
+
+
 
 
