@@ -230,7 +230,7 @@ SHOW DATABASES;
 
 ##### 2.9 Configure a repository for Cloudera Manager
 ```linux
-sudo wget https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo -P /etc/yum.repos.d/
+sudo wget --no-check-certificate https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo -P /etc/yum.repos.d/
 
 sudo vi /etc/yum.repos.d/cloudera-manager.repo
 
