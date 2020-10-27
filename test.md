@@ -244,4 +244,11 @@ baseurl = https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.2/
 curl -k https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
 ```
 
+##### 2.10 Install Cloudera Manager Server
+```linux
+yum install -y cloudera-manager-daemons cloudera-manager-server
+```
+만약 [Errno 14] curl#60 - "Peer's certificate issuer has been marked as not trusted by the user." 가 발생하는경우
+/etc/yum.conf 아래 sslverify=0 또는 sslverify=false를 추가한다.
+
 
