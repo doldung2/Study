@@ -251,4 +251,9 @@ yum install -y cloudera-manager-daemons cloudera-manager-server
 만약 [Errno 14] curl#60 - "Peer's certificate issuer has been marked as not trusted by the user." 가 발생하는경우
 /etc/yum.conf 아래 sslverify=0 또는 sslverify=false를 추가한다.
 
+##### 2.11 Set up the Cloudera Manager Database
+```linux
+sudo /usr/share/cmf/schema/scm_prepare_database.sh mysql scm scm training
+sudo systemctl start cloudera-scm-server
+```
 
