@@ -63,17 +63,30 @@ sudo vi /etc/profile
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk/jre
 export PATH=$PATH:$JAVA_HOME/bin
 ```
+##### 2. Install SSH & config sshd_config
+```linux
+yum -y install openssh-server openssh-clients openssh-askpass
 
-##### 2. Install and Configure MariaDB for Cloudera Software
-##### 2.1 Install MariaDB Server
+# SSH를 사용하여 EC2 인스턴스에 로그인할 때 키 페어 대신에 암호 로그인을 활성화하여 패스워드 인증 허용
+
+sudo vi /etc/ssh/sshd_config
+# PasswordAuthentication -> yes 로 변경 후 저장
+
+# sshd 재시작 및 상태확인
+sudo systemctl restart sshd.service
+sudo systemctl status sshd.service [not found 인 경우도 있음]
+```
+
+##### 3. Install and Configure MariaDB for Cloudera Software
+##### 3.1 Install MariaDB Server
 ```linux
 yum install mariadb-server
 ```
-##### 2.2 Configuring and Starting the MariaDB Server
+##### 3.2 Configuring and Starting the MariaDB Server
 ```linux
 systemctl stop mariadb
 ```
-##### 2.3 configuration option file (/etc/my.cnf)
+##### 3.3 configuration option file (/etc/my.cnf)
 ```linux
 [mysqld]
 datadir=/var/lib/mysql
@@ -136,17 +149,17 @@ pid-file=/var/run/mariadb/mariadb.pid
 !includedir /etc/my.cnf.d
 ```
 
-##### 2.4 Ensure the MariaDB server starts at boot
+##### 3.4 Ensure the MariaDB server starts at boot
 ```linux
 systemctl enable mariadb
 ```
 
-##### 2.5 Start the MariaDB server
+##### 3.5 Start the MariaDB server
 ```linux
 systemctl start mariadb
 ```
 
-##### 2.6 Run /usr/bin/mysql_secure_installation
+##### 3.6 Run /usr/bin/mysql_secure_installation
 ```linux
 /usr/bin/mysql_secure_installation
 ```
@@ -173,7 +186,7 @@ installation should now be secure.
 Thanks for using MariaDB!
 ```
 
-##### 2.7 Installing the MySQL JDBC Driver for MariaDB
+##### 3.7 Installing the MySQL JDBC Driver for MariaDB
 ```linux
 wget --no-check-certificate https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz
 
@@ -184,8 +197,8 @@ cd mysql-connector-java-5.1.46
 sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java.jar
 ```
 
-##### 2.8 Creating Databases for Cloudera Software
-##### 2.8.1 Login as root & Create Database
+##### 3.8 Creating Databases for Cloudera Software
+##### 3.8.1 Login as root & Create Database
 ```linux
 mysql -u root -p
 ```
@@ -228,7 +241,7 @@ status
 SHOW DATABASES;
 ```
 
-##### 2.9 Configure a repository for Cloudera Manager
+##### 3.9 Configure a repository for Cloudera Manager
 ```linux
 sudo wget --no-check-certificate https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/cloudera-manager.repo -P /etc/yum.repos.d/
 
@@ -244,30 +257,21 @@ baseurl = https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.2/
 curl -k https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
 ```
 
-##### 2.10 Install Cloudera Manager Server
+##### 3.10 Install Cloudera Manager Server
 ```linux
 yum install -y cloudera-manager-daemons cloudera-manager-server
 ```
 만약 [Errno 14] curl#60 - "Peer's certificate issuer has been marked as not trusted by the user." 가 발생하는경우
 /etc/yum.conf 아래 sslverify=0 또는 sslverify=false를 추가한다.
 
-##### 2.11 Set up the Cloudera Manager Database
+##### 3.11 Set up the Cloudera Manager Database
 ```linux
 sudo /usr/share/cmf/schema/scm_prepare_database.sh mysql scm scm training
+
+#local docker에서 수행하때는 다음 처럼 입력
+#sudo /usr/share/cmf/schema/scm_prepare_database.sh  mysql -h cm.dd2.com --scm-host cm.dd2.com scm scm
+
 sudo systemctl start cloudera-scm-server
-```
-##### 2.12 Install SSH & config sshd_config
-```linux
-yum -y install openssh-server openssh-clients openssh-askpass
-
-# SSH를 사용하여 EC2 인스턴스에 로그인할 때 키 페어 대신에 암호 로그인을 활성화하여 패스워드 인증 허용
-
-sudo vi /etc/ssh/sshd_config
-# PasswordAuthentication -> yes 로 변경 후 저장
-
-# sshd 재시작 및 상태확인
-sudo systemctl restart sshd.service
-sudo systemctl status sshd.service [not found 인 경우도 있음]
 ```
 
 
