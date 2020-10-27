@@ -54,24 +54,24 @@ cat /etc/group | grep skcc
 #### User MariaDB as the database for all the services. You may choose your own username and passwords but make a record of it so that we may access them.
 
 #### List the following in your GitHub
-#### 1. A command and output that shows the hostname of your database server
+##### 1. A command and output that shows the hostname of your database server
 ```linux
 show VARIABLES where Variable_name = 'hostname';
 ```
 
-#### 2. A command and output that reports the database server version
+##### 2. A command and output that reports the database server version
 ```linux
 status
 ```
 
-#### 3. A command and output that lists all the databases in the server
+##### 3. A command and output that lists all the databases in the server
 ```linux
 SHOW DATABASES;
 ```
 
 #### Install Cloudera Manager
 
-##### Install JAVA
+##### 1. Install JAVA
 ```linux
 sudo yum install -y java-1.8.0-openjdk-devel
 sudo vi /etc/profile
@@ -80,9 +80,113 @@ export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk/jre
 export PATH=$PATH:$JAVA_HOME/bin
 ```
 
-##### Install MariaDB Server
+##### 2. Install and Configure MariaDB for Cloudera Software
+##### 2.1 Install MariaDB Server
 ```linux
 yum install mariadb-server
+```
+##### 2.2 Configuring and Starting the MariaDB Server
+```linux
+systemctl stop mariadb
+```
+##### 2.3 configuration option file (/etc/my.cnf)
+```linux
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+transaction-isolation = READ-COMMITTED
+# Disabling symbolic-links is recommended to prevent assorted security risks;
+# to do so, uncomment this line:
+symbolic-links = 0
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mariadb according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+
+key_buffer = 32M
+# (deprecated) key_buffer_size = 32M
+max_allowed_packet = 32M
+thread_stack = 256K
+thread_cache_size = 64
+query_cache_limit = 8M
+query_cache_size = 64M
+query_cache_type = 1
+
+max_connections = 550
+#expire_logs_days = 10
+#max_binlog_size = 100M
+
+#log_bin should be on a disk with enough free space.
+#Replace '/var/lib/mysql/mysql_binary_log' with an appropriate path for your
+#system and chown the specified folder to the mysql user.
+log_bin=/var/lib/mysql/mysql_binary_log
+
+#In later versions of MariaDB, if you enable the binary log and do not set
+#a server_id, MariaDB will not start. The server_id must be unique within
+#the replicating group.
+server_id=1
+
+binlog_format = mixed
+
+read_buffer_size = 2M
+read_rnd_buffer_size = 16M
+sort_buffer_size = 8M
+join_buffer_size = 8M
+
+# InnoDB settings
+innodb_file_per_table = 1
+innodb_flush_log_at_trx_commit  = 2
+innodb_log_buffer_size = 64M
+innodb_buffer_pool_size = 4G
+innodb_thread_concurrency = 8
+innodb_flush_method = O_DIRECT
+innodb_log_file_size = 512M
+
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+
+#
+# include all files from the config directory
+#
+!includedir /etc/my.cnf.d
+```
+
+##### 2.4 Ensure the MariaDB server starts at boot
+```linux
+systemctl enable mariadb
+```
+
+##### 2.5 Start the MariaDB server
+```linux
+systemctl start mariadb
+```
+
+##### 2.6 Run /usr/bin/mysql_secure_installation
+```linux
+/usr/bin/mysql_secure_installation
+```
+```linux
+[...]
+Enter current password for root (enter for none):
+OK, successfully used password, moving on...
+[...]
+Set root password? [Y/n] Y
+New password:
+Re-enter new password:
+[...]
+Remove anonymous users? [Y/n] Y
+[...]
+Disallow root login remotely? [Y/n] N
+[...]
+Remove test database and access to it [Y/n] Y
+[...]
+Reload privilege tables now? [Y/n] Y
+[...]
+All done!  If you've completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks for using MariaDB!
 ```
 
 
