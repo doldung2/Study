@@ -71,3 +71,19 @@ SHOW DATABASES;
 
 #### Install Cloudera Manager
 
+##### Install JAVA
+```linux
+sudo yum install -y java-1.8.0-openjdk-devel
+sudo vi /etc/profile
+
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk/jre
+export PATH=$PATH:$JAVA_HOME/bin
+```
+
+##### Install MariaDB Server
+```linux
+yum install mariadb-server
+```
+
+
+
