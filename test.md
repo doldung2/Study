@@ -53,22 +53,6 @@ cat /etc/group | grep skcc
 
 #### User MariaDB as the database for all the services. You may choose your own username and passwords but make a record of it so that we may access them.
 
-#### List the following in your GitHub
-##### 1. A command and output that shows the hostname of your database server
-```linux
-show VARIABLES where Variable_name = 'hostname';
-```
-
-##### 2. A command and output that reports the database server version
-```linux
-status
-```
-
-##### 3. A command and output that lists all the databases in the server
-```linux
-SHOW DATABASES;
-```
-
 #### Install Cloudera Manager
 
 ##### 1. Install JAVA
@@ -228,6 +212,21 @@ GRANT ALL ON navms.* TO 'navms'@'%' IDENTIFIED BY 'navms';
 GRANT ALL ON oozie.* TO 'oozie'@'%' IDENTIFIED BY 'oozie';
 ```
 
+#### List the following in your GitHub
+##### 1. A command and output that shows the hostname of your database server
+```linux
+show VARIABLES where Variable_name = 'hostname';
+```
+
+##### 2. A command and output that reports the database server version
+```linux
+status
+```
+
+##### 3. A command and output that lists all the databases in the server
+```linux
+SHOW DATABASES;
+```
 
 
 
