@@ -201,7 +201,7 @@ sudo cp mysql-connector-java-5.1.46-bin.jar /usr/share/java/mysql-connector-java
 ```
 
 ##### 2.8 Creating Databases for Cloudera Software
-##### 2.8.1 Login as root
+##### 2.8.1 Login as root & Create Database
 ```linux
 mysql -u root -p
 ```
