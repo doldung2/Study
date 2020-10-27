@@ -235,12 +235,13 @@ sudo wget --no-check-certificate https://archive.cloudera.com/cm5/redhat/7/x86_6
 sudo vi /etc/yum.repos.d/cloudera-manager.repo
 
 [cloudera-manager]
-name = Cloudera Manager, Version 5.15.2
+#name = Cloudera Manager, Version 5.15.2
 baseurl = https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/5.15.2/
-gpgkey = https://archive.cloudera.com/redhat/cdh/RPM-GPG-KEY-cloudera
-gpgcheck = 1
+#gpgkey = https://archive.cloudera.com/redhat/cdh/RPM-GPG-KEY-cloudera
+#gpgcheck = 1
 
-sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+#sudo rpm --import https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
+curl -k https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
 ```
 
 
