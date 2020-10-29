@@ -41,6 +41,27 @@ dfs -cp /user/training/problem2/data/employee/*.parquet /user/hive/warehouse/emp
 ```
 
 Problem3
+```sql
+use problem3;
+
+create external table if not exists solution(
+  id int,
+  fname string,
+  lname string,
+  hphone string
+  )
+  row format delimited fields terminated by '\t'
+  stored as orc location "/user/training/problem3/solution"
+  
+insert into solution
+select c.id
+, c.fname
+, c.lname
+, c.hphone
+from customer c, account a
+where c.id = a.custid
+and a.amount < 0;
+```
 Problem4
 Problem5
 Problem6
