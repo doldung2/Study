@@ -149,3 +149,16 @@ select * from solution;
 ```
 
 Problem10
+```sql
+create view solution as
+select c.id as id
+, c.fname as fname
+, c.lname as lname
+, c.city as city
+, c.state as state
+, c.zip as zip
+, b.charge as charge
+, substr(b.tstamp, 0, 10) as billdate
+from customer c, billing b
+where c.id = b.id
+```
