@@ -1,3 +1,4 @@
+Problem1
 ```sql
 -- solution.sql
 
@@ -14,3 +15,36 @@ where a.status='Active'
 and a.type = b.type
 ;
 ```
+
+Problem2
+```sql
+create database if not exists problem2;
+
+use problem2;
+
+create external table if not exists solution(
+  id int,
+  fname string,
+  lname string,
+  address string,
+  city string,
+  state string,
+  zip string,
+  birthday string,
+  hireday string
+  )
+  row format delimited fields terminated by '\t'
+  stored as parquet location "/user/hive/warehouse/employee"
+```
+```linux
+dfs -cp /user/training/problem2/data/employee/*.parquet /user/hive/warehouse/employee/
+```
+
+Problem3
+Problem4
+Problem5
+Problem6
+Problem7
+Problem8
+Problem9
+Problem10
