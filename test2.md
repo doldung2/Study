@@ -142,4 +142,10 @@ sqoop export \
 --columns 'id, fname , lname , address , city, state , zip , birthday';
 ```
 Problem9
+```sql
+create table solution 
+select concat('A', id) as id, fname, lname, address, city, state, zip, birthday from customer;
+select * from solution;
+```
+
 Problem10
