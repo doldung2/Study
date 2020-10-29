@@ -67,24 +67,6 @@ Problem4
 create database if not exists problem4;
 use problem4;
 
--- empoyee1 create
-create external table if not exists employee1(
-  custid int,
-  fname string,
-  lname string,
-  address string,
-  city string,
-  state string,
-  zip string
-  )
-  row format delimited fields terminated by '\t'
-  stored as TEXTFILE location "/user/training/problem4/data/employee1/"
-```
-
-Problem5
-```sql
-CREATE DATABASE problem4;
-
 CREATE EXTERNAL TABLE employee1(customer_id INT, fname STRING, lname STRING, address STRING, city STRING, state STRING, zip STRING)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
 STORED AS TEXTFILE 
@@ -104,9 +86,9 @@ UNION ALL
 SELECT customer_id, initcap(fname) as fname, initcap(lname), address, city, state, substr(zip,1,5) from employee2;
 ```
 
-Problem6
+Problem5
 ```sql
-# solution.sql ( /home/training/problem5 )
+# solution.sql
 
 mkdir problem5
 -- solution.sql
@@ -124,7 +106,40 @@ where e.city = 'Palo Alto'
 and e.state = 'CA'
 ;
 ```
+Problem6
+```sql
+create table solution row format delimited fields terminated by '\t'
+stored as textfile as
+select id, 
+       fname, 
+       lname, 
+       address, 
+       city, 
+       state, 
+       zip, 
+       substr(birthday, 0, 5) 
+from employee;
+```
 Problem7
+```sql
+select concat(fname, ' ', lname) as name 
+from employee 
+where city='Seattle' 
+order by fname;
+```
+
 Problem8
+```
+sqoop export \
+--connect jdbc:mysql://localhost/problem8 \
+--dirver com.mysql.jdbc.Driver \
+--username cloudera \
+--password cloudera \
+--table solution \
+-m 1 \
+--export-dir '/user/training/problem8/data/customer/' \
+--fields-terminated-by '\t' \
+--columns 'id, fname , lname , address , city, state , zip , birthday';
+```
 Problem9
 Problem10
