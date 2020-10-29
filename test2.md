@@ -63,8 +63,67 @@ where c.id = a.custid
 and a.amount < 0;
 ```
 Problem4
+```sql
+create database if not exists problem4;
+use problem4;
+
+-- empoyee1 create
+create external table if not exists employee1(
+  custid int,
+  fname string,
+  lname string,
+  address string,
+  city string,
+  state string,
+  zip string
+  )
+  row format delimited fields terminated by '\t'
+  stored as TEXTFILE location "/user/training/problem4/data/employee1/"
+```
+
 Problem5
+```sql
+CREATE DATABASE problem4;
+
+CREATE EXTERNAL TABLE employee1(customer_id INT, fname STRING, lname STRING, address STRING, city STRING, state STRING, zip STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
+STORED AS TEXTFILE 
+LOCATION '/user/training/problem4/data/employee1';
+
+CREATE EXTERNAL TABLE employee2(customer_id INT, none STRING, fname STRING, lname STRING, address STRING, city STRING, state STRING, zip STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS TEXTFILE 
+LOCATION '/user/training/problem4/data/employee2';
+
+CREATE TABLE solution 
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' 
+STORED AS TEXTFILE 
+LOCATION '/user/training/problem4/solution' AS 
+SELECT customer_id, initcap(fname) as fname, initcap(lname), address, city, state, substr(zip,1,5) from employee1
+UNION ALL
+SELECT customer_id, initcap(fname) as fname, initcap(lname), address, city, state, substr(zip,1,5) from employee2;
+```
+
 Problem6
+```sql
+# solution.sql ( /home/training/problem5 )
+
+mkdir problem5
+-- solution.sql
+
+use problem5;
+
+select concat_ws('\t', c.fname, c.lname, c.city, c.state)
+from customer c
+where c.city = 'Palo Alto'
+and c.state = 'CA'
+union all
+select concat_ws('\t', e.fname, e.lname, e.city, e.state)
+from employee e
+where e.city = 'Palo Alto'
+and e.state = 'CA'
+;
+```
 Problem7
 Problem8
 Problem9
