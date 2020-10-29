@@ -76,6 +76,7 @@ sudo vi /etc/ssh/sshd_config
 sudo systemctl restart sshd.service
 sudo systemctl status sshd.service [not found 인 경우도 있음]
 ```
+* 만약  'connect to host localhost port 22: Connection refused' 라고 나오면 vi /etc/hosts.allow에 ssh:ALL:allow\sshd:ALL:allow 를 입력하고 sshd 서비스를 restart
 
 ##### 3. Install and Configure MariaDB for Cloudera Software
 ##### 3.1 Install MariaDB Server
